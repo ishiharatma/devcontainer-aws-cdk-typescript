@@ -51,6 +51,10 @@ cd your-new-repo-name
 
 ### 3. VS Codeで開く
 
+```bash
+code .
+```
+
 ### 4. Dev Containers拡張機能を使用する
 
 1. まだインストールしていない場合は、VS Codeに[Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)拡張機能をインストールします
