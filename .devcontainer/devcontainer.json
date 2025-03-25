@@ -23,7 +23,10 @@
 		// AWS CDK (Cloud Development Kit) installation
 		// https://aws.amazon.com/cdk/
 		// TypeScript API reference: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
-		"ghcr.io/devcontainers-contrib/features/aws-cdk:2": {}
+		"ghcr.io/devcontainers-contrib/features/aws-cdk:2": {
+			// if you want to install a specific version of the AWS CDK
+			// "version": "2.1000.0"
+		}
 
 		// AWS SSO Util to simplify authentication with AWS SSO
 		// Uncomment if you prefer using static AWS IAM keys
@@ -38,6 +41,12 @@
 		
 		// Claude Code feature (if needed)
 		// "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+
+		// Python development environment (optional, uncomment if needed)
+		// "ghcr.io/devcontainers/features/python:1": {
+		// 	// if you want to install a specific version of Python
+		// 	// "version": "3.12"
+		//}
 
 		// Security tools (optional, uncomment if needed)
 		// tfsec: Security scanner for Terraform code
@@ -117,10 +126,11 @@
 				// Default terminal in Linux
 				"terminal.integrated.defaultProfile.linux": "/bin/bash",
 				// TypeScript library path
-				"typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib"
+				"typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib",
 				"editor.formatOnSave": true,
 				"editor.codeActionsOnSave": {
-					"source.fixAll.eslint": true
+					"source.fixAll.eslint": "explicit",
+					"source.fixAll.stylelint": "always"
 				},
 				"eslint.validate": ["typescript"]
 			}
@@ -129,7 +139,7 @@
 	// Command to run after container creation
 	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
 	// User in the container
-	"remoteUser": "vscode",
+	"remoteUser": "node",
 	// Workspace folder path
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
