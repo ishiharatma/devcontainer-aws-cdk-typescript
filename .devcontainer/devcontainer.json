@@ -8,8 +8,11 @@
 	// For more details and options, see:
 	// https://github.com/devcontainers/templates/tree/main/src/typescript-node
 	// https://hub.docker.com/r/microsoft/devcontainers-typescript-node
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye",
-
+	//"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
 	// Features pre-installed in your development environment:
 	"features": {
 		// Git installation
@@ -23,9 +26,10 @@
 		// AWS CDK (Cloud Development Kit) installation
 		// https://aws.amazon.com/cdk/
 		// TypeScript API reference: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
+		// https://github.com/danielbraun89/devcontainer-features/tree/main/src/aws-cdk
 		"ghcr.io/devcontainers-contrib/features/aws-cdk:2": {
 			// if you want to install a specific version of the AWS CDK
-			// "version": "2.1000.0"
+			// "version": "2.186.0"
 		}
 
 		// AWS SSO Util to simplify authentication with AWS SSO
@@ -39,7 +43,7 @@
 		// Docker in Docker - allows you to create Docker containers within your development environment
 		// "ghcr.io/devcontainers/features/docker-in-docker:2": {}
 		
-		// Claude Code feature (if needed)
+		// Claude Code feature (optional, uncomment if neede)
 		// "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
 
 		// Python development environment (optional, uncomment if needed)
