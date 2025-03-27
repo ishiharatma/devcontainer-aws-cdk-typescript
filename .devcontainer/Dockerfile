@@ -23,13 +23,13 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# nodeユーザーにsudo権限を付与
+# Grant sudo privileges to the node user
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node
 
 ## optional, uncomment if neede:
 # Tell Git where to find the certificate
 #RUN git config --global http.sslCAInfo /usr/local/share/ca-certificates/your-root-ca.crt
 
-# ユーザーをnodeに設定
+# Set user to node
 USER node
 WORKDIR /home/node
