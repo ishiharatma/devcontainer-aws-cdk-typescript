@@ -5,88 +5,94 @@ set -e
 #cd /workspaces/${localWorkspaceFolderBasename}
 #test -f package.json && npm install || echo 'No package.json found, skipping npm install'
 
+<<<<<<< .mine
 git config --global core.autocrlf false
 git config --global core.filemode false
 
-# AWS SSOãƒ­ã‚°ã‚¤ãƒ³ã¨get-caller-identityã®ã‚¨ã‚¤ãƒªã‚¢ã‚¹è¨­å®š
-# åŸºæœ¬ã‚³ãƒãƒ³ãƒ‰ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ç”¨ï¼‰
-echo 'alias awslogin="aws sso login && echo \"ç¾åœ¨ã®èªè¨¼æƒ…å ±:\" && aws sts get-caller-identity"' >> ~/.bashrc
-#echo 'alias awslogin="aws sso login && echo \"ç¾åœ¨ã®èªè¨¼æƒ…å ±:\" && aws sts get-caller-identity"' >> ~/.zshrc
+=======
+
+
+
+>>>>>>> .theirs
+# AWS SSOƒƒOƒCƒ“‚Æget-caller-identity‚ÌƒGƒCƒŠƒAƒXİ’è
+# Šî–{ƒRƒ}ƒ“ƒhiƒfƒtƒHƒ‹ƒgƒvƒƒtƒ@ƒCƒ‹—pj
+echo 'alias awslogin="aws sso login && echo \"Œ»İ‚Ì”FØî•ñ:\" && aws sts get-caller-identity"' >> ~/.bashrc
+#echo 'alias awslogin="aws sso login && echo \"Œ»İ‚Ì”FØî•ñ:\" && aws sts get-caller-identity"' >> ~/.zshrc
 echo 'alias awsid="aws sts get-caller-identity"' >> ~/.bashrc
 #echo 'alias awsid="aws sts get-caller-identity"' >> ~/.zshrc
 
-# NPMé–¢é€£ã®ã‚¨ã‚¤ãƒªã‚¢ã‚¹
+# NPMŠÖ˜A‚ÌƒGƒCƒŠƒAƒX
 echo 'alias npmfl="npm run format && npm run lint:fix"' >> ~/.bashrc
 
-# CDKé–¢é€£ã®ã‚¨ã‚¤ãƒªã‚¢ã‚¹
+# CDKŠÖ˜A‚ÌƒGƒCƒŠƒAƒX
 echo 'alias cdksynth="npm run cdk synth \"Dev/*\""' >> ~/.bashrc
 
-# ãã®ä»–ã®ã‚¨ã‚¤ãƒªã‚¢ã‚¹
+# ‚»‚Ì‘¼‚ÌƒGƒCƒŠƒAƒX
 echo '
-# ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®šå¯èƒ½ãªAWS SSOãƒ­ã‚°ã‚¤ãƒ³é–¢æ•°
+# ƒvƒƒtƒ@ƒCƒ‹w’è‰Â”\‚ÈAWS SSOƒƒOƒCƒ“ŠÖ”
 awsloginp() {
   if [ -z "$1" ]; then
-    echo "ä½¿ç”¨æ³•: awsloginp <ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«å>"
+    echo "g—p–@: awsloginp <ƒvƒƒtƒ@ƒCƒ‹–¼>"
     return 1
   fi
-  aws sso login --profile "$1" && echo "ç¾åœ¨ã®èªè¨¼æƒ…å ± ($1):" && aws sts get-caller-identity --profile "$1"
+  aws sso login --profile "$1" && echo "Œ»İ‚Ì”FØî•ñ ($1):" && aws sts get-caller-identity --profile "$1"
 }
 
-# ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®šå¯èƒ½ãªAWSèªè¨¼æƒ…å ±ç¢ºèªé–¢æ•°
+# ƒvƒƒtƒ@ƒCƒ‹w’è‰Â”\‚ÈAWS”FØî•ñŠm”FŠÖ”
 awsidp() {
   if [ -z "$1" ]; then
-    echo "ä½¿ç”¨æ³•: awsidp <ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«å>"
+    echo "g—p–@: awsidp <ƒvƒƒtƒ@ƒCƒ‹–¼>"
     return 1
   fi
   aws sts get-caller-identity --profile "$1"
 }
 
-# ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®šå¯èƒ½ãªAWS SSOãƒ­ã‚°ã‚¤ãƒ³é–¢æ•°
+# ƒvƒƒtƒ@ƒCƒ‹w’è‰Â”\‚ÈAWS SSOƒƒOƒCƒ“ŠÖ”
 awsloginp() {
   if [ -z "$1" ]; then
-    echo "ä½¿ç”¨æ³•: awsloginp <ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«å>"
+    echo "g—p–@: awsloginp <ƒvƒƒtƒ@ƒCƒ‹–¼>"
     return 1
   fi
-  aws sso login --profile "$1" && echo "ç¾åœ¨ã®èªè¨¼æƒ…å ± ($1):" && aws sts get-caller-identity --profile "$1"
+  aws sso login --profile "$1" && echo "Œ»İ‚Ì”FØî•ñ ($1):" && aws sts get-caller-identity --profile "$1"
 }
 
-# ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®šå¯èƒ½ãªAWSèªè¨¼æƒ…å ±ç¢ºèªé–¢æ•°
+# ƒvƒƒtƒ@ƒCƒ‹w’è‰Â”\‚ÈAWS”FØî•ñŠm”FŠÖ”
 awsidp() {
   if [ -z "$1" ]; then
-    echo "ä½¿ç”¨æ³•: awsidp <ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«å>"
+    echo "g—p–@: awsidp <ƒvƒƒtƒ@ƒCƒ‹–¼>"
     return 1
   fi
   aws sts get-caller-identity --profile "$1"
 }
 
-# ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã®Tipsã‚’è¡¨ç¤ºã™ã‚‹é–¢æ•°
+# ƒGƒCƒŠƒAƒX‚ÌTips‚ğ•\¦‚·‚éŠÖ”
 tips() {
   echo "-----------------------------------"
-  echo "ä¾¿åˆ©ãªã‚³ãƒãƒ³ãƒ‰Tips"
+  echo "•Ö—˜‚ÈƒRƒ}ƒ“ƒhTips"
   echo "-----------------------------------"
-  echo "AWSé–¢é€£ï¼š"
-  echo "  ã€Œawsloginã€: AWS SSOãƒ­ã‚°ã‚¤ãƒ³ + ç¾åœ¨ã®èªè¨¼æƒ…å ±ç¢ºèªï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ï¼‰"
-  echo "  ã€Œawsidã€: èªè¨¼æƒ…å ±ç¢ºèªã®ã¿ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ï¼‰"
-  echo "  ã€Œawsloginp <ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«å>ã€: æŒ‡å®šãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ã§AWS SSOãƒ­ã‚°ã‚¤ãƒ³ + èªè¨¼æƒ…å ±ç¢ºèª"
-  echo "  ã€Œawsidp <ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«å>ã€: æŒ‡å®šãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ã§èªè¨¼æƒ…å ±ç¢ºèªã®ã¿"
+  echo "AWSŠÖ˜AF"
+  echo "  uawsloginv: AWS SSOƒƒOƒCƒ“ + Œ»İ‚Ì”FØî•ñŠm”FiƒfƒtƒHƒ‹ƒgƒvƒƒtƒ@ƒCƒ‹j"
+  echo "  uawsidv: ”FØî•ñŠm”F‚Ì‚İiƒfƒtƒHƒ‹ƒgƒvƒƒtƒ@ƒCƒ‹j"
+  echo "  uawsloginp <ƒvƒƒtƒ@ƒCƒ‹–¼>v: w’èƒvƒƒtƒ@ƒCƒ‹‚ÅAWS SSOƒƒOƒCƒ“ + ”FØî•ñŠm”F"
+  echo "  uawsidp <ƒvƒƒtƒ@ƒCƒ‹–¼>v: w’èƒvƒƒtƒ@ƒCƒ‹‚Å”FØî•ñŠm”F‚Ì‚İ"
   echo ""
-  echo "NPMé–¢é€£ï¼š"
-  echo "  ã€Œnpmflã€: linter ãŠã‚ˆã³ formatter ã®å®Ÿè¡Œï¼ˆnpm run format && npm run lint:fixï¼‰"
-  echo "CDKé–¢é€£ï¼š"
-  echo "  ã€Œcdksynthã€: CloudFormation ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®ç”Ÿæˆï¼ˆnpm run cdk synth \"Dev/*\"ï¼‰"
+  echo "NPMŠÖ˜AF"
+  echo "  unpmflv: linter ‚¨‚æ‚Ñ formatter ‚ÌÀsinpm run format && npm run lint:fixj"
+  echo "CDKŠÖ˜AF"
+  echo "  ucdksynthv: CloudFormation ƒeƒ“ƒvƒŒ[ƒg‚Ì¶¬inpm run cdk synth \"Dev/*\"j"
   echo ""
-  echo "ãã®ä»–ï¼š"
-  echo "  ã€Œtipsã€: ã“ã®ãƒ˜ãƒ«ãƒ—ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º"
+  echo "‚»‚Ì‘¼F"
+  echo "  utipsv: ‚±‚Ìƒwƒ‹ƒvƒƒbƒZ[ƒW‚ğ•\¦"
   echo "-----------------------------------"
-  echo "ä¾‹:"
-  echo "  awslogin             ï¼š ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ã§ãƒ­ã‚°ã‚¤ãƒ³"
-  echo "  awsloginp dev-admin  ï¼š devãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ã§ãƒ­ã‚°ã‚¤ãƒ³"
-  echo "  npmfl                ï¼š linter ãŠã‚ˆã³ formatter ã®å®Ÿè¡Œ"
+  echo "—á:"
+  echo "  awslogin             F ƒfƒtƒHƒ‹ƒgƒvƒƒtƒ@ƒCƒ‹‚ÅƒƒOƒCƒ“"
+  echo "  awsloginp dev-admin  F devƒvƒƒtƒ@ƒCƒ‹‚ÅƒƒOƒCƒ“"
+  echo "  npmfl                F linter ‚¨‚æ‚Ñ formatter ‚ÌÀs"
   echo "-----------------------------------"
 }
 ' >> ~/.bashrc
 
-# å¤‰æ›´ã‚’ç¾åœ¨ã®ã‚·ã‚§ãƒ«ã«åæ˜ ã•ã›ã‚‹
+# •ÏX‚ğŒ»İ‚ÌƒVƒFƒ‹‚É”½‰f‚³‚¹‚é
 #source ~/.bashrc 2>/dev/null || source ~/.zshrc 2>/dev/null
 source ~/.bashrc 2>/dev/null
 
@@ -108,13 +114,13 @@ echo "-----------------------------------"
 echo "checking aws configuration..."
 echo "-----------------------------------"
 
-# "Error when retrieving token from sso: Token has expired and refresh failed" ã¨ã„ã†ã‚¨ãƒ©ãƒ¼ãŒå‡ºã‚‹å ´åˆã«
-# æˆ»ã‚Šå€¤ãŒæ­£å¸¸ã§ãªããªã‚‹ãŸã‚ã€echo ""ã‚’ã¤ã‘ã¦ãŠã
-# æœ¬æ¥ã¯ã€aws sso login <profile>ã‚’å®Ÿè¡Œã—ã¦ãƒˆãƒ¼ã‚¯ãƒ³ã‚’æ›´æ–°ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
+# "Error when retrieving token from sso: Token has expired and refresh failed" ‚Æ‚¢‚¤ƒGƒ‰[‚ªo‚éê‡‚É
+# –ß‚è’l‚ª³í‚Å‚È‚­‚È‚é‚½‚ßAecho ""‚ğ‚Â‚¯‚Ä‚¨‚­
+# –{—ˆ‚ÍAaws sso login <profile>‚ğÀs‚µ‚Äƒg[ƒNƒ“‚ğXV‚·‚é•K—v‚ª‚ ‚é
 echo "## aws configure list"
 aws configure list || echo ""
 echo "## aws configure list-profiles"
 aws configure list-profiles || echo ""
 
-# åˆå›ã®tipsè¡¨ç¤º
-echo "ç™»éŒ²æ¸ˆã¿ã®ä¾¿åˆ©ãªã‚³ãƒãƒ³ãƒ‰ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã¯ã€tipsã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã—ã¦ç¢ºèªã—ã¦ãã ã•ã„"
+# ‰‰ñ‚Ìtips•\¦
+echo "“o˜^Ï‚İ‚Ì•Ö—˜‚ÈƒRƒ}ƒ“ƒhƒGƒCƒŠƒAƒX‚ÍAtipsƒRƒ}ƒ“ƒh‚ğÀs‚µ‚ÄŠm”F‚µ‚Ä‚­‚¾‚³‚¢"
