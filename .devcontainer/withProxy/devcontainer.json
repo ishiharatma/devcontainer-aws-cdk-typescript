@@ -8,8 +8,11 @@
 	// For more details and options, see:
 	// https://github.com/devcontainers/templates/tree/main/src/typescript-node
 	// https://hub.docker.com/r/microsoft/devcontainers-typescript-node
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye",
-
+	//"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "../.."
+	},
 	// Features pre-installed in your development environment:
 	"features": {
 		// Git installation
@@ -23,6 +26,7 @@
 		// AWS CDK (Cloud Development Kit) installation
 		// https://aws.amazon.com/cdk/
 		// TypeScript API reference: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
+		// https://github.com/danielbraun89/devcontainer-features/tree/main/src/aws-cdk
 		"ghcr.io/devcontainers-contrib/features/aws-cdk:2": {}
 
 		// AWS SSO Util to simplify authentication with AWS SSO
@@ -59,6 +63,7 @@
 		// Required if using static AWS IAM keys
 		// Useful if using AWS SSO and want to share AWS config across environments
 		//"source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws/,target=/home/vscode/.aws/,type=bind,consistency=cached"
+	    "source=./.aws/,target=/home/node/.aws/,type=bind,consistency=cached"
 	],
 
 	// Recommended settings for the development environment
@@ -106,7 +111,8 @@
 				// CSV visualization extension
 				"mechatroner.rainbow-csv",
 				// Text linting extension
-				"taichi.vscode-textlint",
+				//"taichi.vscode-textlint", // deprecated
+				"3w36zj6.textlint",
 				// Diagram creation extension
 				"hediet.vscode-drawio",
 				// Code formatting extensions
@@ -117,19 +123,108 @@
 				// Default terminal in Linux
 				"terminal.integrated.defaultProfile.linux": "/bin/bash",
 				// TypeScript library path
-				"typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib"
+				"typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib",
 				"editor.formatOnSave": true,
 				"editor.codeActionsOnSave": {
-					"source.fixAll.eslint": true
+					"source.fixAll.eslint": "explicit",
+					"source.fixAll.stylelint": "always"
 				},
-				"eslint.validate": ["typescript"]
+				"[typescript]": {
+				  "editor.formatOnSave": false
+				},
+				"eslint.validate": ["typescript"],
+				"mcp": {
+					"inputs": [],
+					"servers": {
+						"mcp-server-time": {
+							"command": "python",
+							"args": [
+								"-m",
+								"mcp_server_time",
+								"--local-timezone=Asia/Tokyo"
+							],
+							"env": {}
+						},
+						"github": {
+							"command": "docker",
+							"args": [
+								"run",
+								"-i",
+								"--rm",
+								"--network",
+								"bridge",
+								"-e",
+								"GITHUB_PERSONAL_ACCESS_TOKEN",
+								"mcp/github"
+							],
+							"env": {
+								"GITHUB_PERSONAL_ACCESS_TOKEN": "${localEnv:GITHUB_PERSONAL_ACCESS_TOKEN}"
+							}
+						},
+						"awslabs.core-mcp-server": {
+						  "command": "uvx",
+						  "args": [
+							"awslabs.core-mcp-server@latest"
+						  ],
+						  "env": {
+							"FASTMCP_LOG_LEVEL": "ERROR"
+						  },
+						  "autoApprove": [],
+						  "disabled": false
+						},
+						"awslabs.cdk-mcp-server": {
+							"command": "uvx",
+							"args": [
+								"awslabs.cdk-mcp-server@latest"
+							],
+							"env": {
+								"FASTMCP_LOG_LEVEL": "ERROR"
+							},
+							"disabled": false,
+							"autoApprove": [
+								"CDKGeneralGuidance",
+								"GetAwsSolutionsConstructPattern",
+								"SearchGenAICDKConstructs",
+								"GenerateBedrockAgentSchema",
+								"LambdaLayerDocumentationProvider",
+								"ExplainCDKNagRules",
+								"ExplainCDKPatterns",
+								"CheckCDKNagSuppressions"
+							]
+						},
+						"awslabs.aws-documentation-mcp-server": {
+							"command": "uvx",
+							"args": [
+								"awslabs.aws-documentation-mcp-server@latest"
+							],
+							"env": {
+								"FASTMCP_LOG_LEVEL": "ERROR"
+							},
+							"disabled": false,
+							"autoApprove": [
+								"read_documentation",
+								"search_documentation",
+								"recommend"
+							]
+						},
+						"awslabs.aws-diagram-mcp-server": {
+							"command": "uvx",
+							"args": ["awslabs.aws-diagram-mcp-server"],
+							"env": {
+							  "FASTMCP_LOG_LEVEL": "ERROR"
+							},
+							"autoApprove": [],
+							"disabled": false
+						}
+					}
+				}
 			}
 		}
 	},
 	// Command to run after container creation
 	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
 	// User in the container
-	"remoteUser": "vscode",
+	"remoteUser": "node",
 	// Workspace folder path
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
