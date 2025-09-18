@@ -46,24 +46,6 @@ awsidp() {
   aws sts get-caller-identity --profile "$1"
 }
 
-# プロファイル指定可能なAWS SSOログイン関数
-awsloginp() {
-  if [ -z "$1" ]; then
-    echo "使用法: awsloginp <プロファイル名>"
-    return 1
-  fi
-  aws sso login --profile "$1" && echo "現在の認証情報 ($1):" && aws sts get-caller-identity --profile "$1"
-}
-
-# プロファイル指定可能なAWS認証情報確認関数
-awsidp() {
-  if [ -z "$1" ]; then
-    echo "使用法: awsidp <プロファイル名>"
-    return 1
-  fi
-  aws sts get-caller-identity --profile "$1"
-}
-
 # エイリアスのTipsを表示する関数
 tips() {
   echo "-----------------------------------"
@@ -113,15 +95,6 @@ else
     echo "❌ NPM not found"
 fi
 
-# Amazon Q CLIの設定確認
-if command -v q &> /dev/null; then
-    echo "✅ Amazon Q CLI is available"
-    echo "Amazon Q CLI version:"
-    q --version || echo "Version check failed but CLI is installed"
-else
-    echo "❌ Amazon Q CLI not found"
-fi
-
 # AWS CLIの設定確認
 if command -v aws &> /dev/null; then
     echo "✅ AWS CLI is available"
@@ -129,14 +102,6 @@ if command -v aws &> /dev/null; then
     echo "aws session manager plugin version: $(session-manager-plugin --version)"
 else
     echo "❌ AWS CLI not found"
-fi
-# Pythonの設定確認
-if command -v python3 &> /dev/null; then
-    echo "✅ Python3 is available"
-    echo "Python version:"
-    python3 --version
-else
-    echo "❌ Python3 not found"
 fi
 
 # AWS CDKの設定確認
@@ -146,6 +111,16 @@ if command -v cdk &> /dev/null; then
 else
     echo "❌ AWS CDK not found"
 fi
+
+# Pythonの設定確認
+if command -v python3 &> /dev/null; then
+    echo "✅ Python3 is available"
+    echo "Python version:"
+    python3 --version
+else
+    echo "❌ Python3 not found"
+fi
+
 # Gitの設定確認
 if command -v git &> /dev/null; then
     echo "✅ Git is available"

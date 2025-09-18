@@ -3,6 +3,7 @@
 .aws/credentials
 .aws/config
 .aws/cli/cache/
+.aws/amazonq/
 .aws/amazonq/history/
 .aws/amazonq/cache/
 .aws/amazonq/*.log
