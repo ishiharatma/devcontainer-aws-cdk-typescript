@@ -94,6 +94,13 @@ if command -v npm &> /dev/null; then
 else
     echo "❌ NPM not found"
 fi
+# Gitの設定確認
+if command -v git &> /dev/null; then
+    echo "✅ Git is available"
+    echo "Git version: $(git --version)"
+else
+    echo "❌ Git not found"
+fi
 
 # AWS CLIの設定確認
 if command -v aws &> /dev/null; then
@@ -111,6 +118,13 @@ if command -v cdk &> /dev/null; then
 else
     echo "❌ AWS CDK not found"
 fi
+# localstack
+if command -v localstack &> /dev/null; then
+    echo "✅ LocalStack is available"
+    echo "LocalStack version: $(localstack --version)"
+else
+    echo "❌ LocalStack not found"
+fi
 
 # Pythonの設定確認
 if command -v python3 &> /dev/null; then
@@ -120,13 +134,11 @@ if command -v python3 &> /dev/null; then
 else
     echo "❌ Python3 not found"
 fi
-
-# Gitの設定確認
-if command -v git &> /dev/null; then
-    echo "✅ Git is available"
-    echo "Git version: $(git --version)"
+if command -v pip3 &> /dev/null; then
+    echo "✅ pip3 is available"
+    echo "Pip version: $(pip3 --version)"
 else
-    echo "❌ Git not found"
+    echo "❌ pip3 not found"
 fi
 
 # UV, UVXの設定確認
@@ -141,6 +153,22 @@ if command -v uvx &> /dev/null; then
     echo "UVX version: $(uvx --version)"
 else
     echo "❌ UVX not found"
+fi
+
+# Graphvizの設定確認
+if command -v dot &> /dev/null; then
+    echo "✅ Graphviz is available"
+    echo "Graphviz version: $(dot -V)"
+else
+    echo "❌ Graphviz not found"
+fi
+
+# Amazon Q CLIの設定確認
+if command -v q &> /dev/null; then
+    echo "✅ Amazon Q CLI is available"
+    echo "Amazon Q CLI version: $(q --version || echo "Version check failed but CLI is installed")"
+else
+    echo "❌ Amazon Q CLI not found"
 fi
 
 echo "-----------------------------------"
@@ -158,3 +186,12 @@ aws configure list-profiles || echo ""
 
 # 初回のtips表示
 echo "登録済みの便利なコマンドエイリアスは、tipsコマンドを実行して確認してください"
+
+echo "=== Post-create setup completed ==="
+echo "You can now use:"
+echo "  - q --help          (Amazon Q CLI)"
+echo "  - aws --help        (AWS CLI)"
+echo "  - python3 --help (Python)"
+echo "  - cdk --help     (AWS CDK)"
+echo "  - localstack --help (LocalStack)"
+echo "Type 'tips' to see useful command aliases and functions."

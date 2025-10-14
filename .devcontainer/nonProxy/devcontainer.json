@@ -11,7 +11,16 @@
 	//"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye",
 	"build": {
 		"dockerfile": "Dockerfile",
-		"context": "../.."
+		"context": "../..",
+        "args": {
+            "VARIANT": "1-22-bookworm", // localstack requires glibc 2.35+ which is only available in ubuntu 22.04+ or debian bookworm+
+            //"VARIANT": "1-22-bullseye",
+            "LOCALSTACK_VERSION": "4.9.1"
+        },
+		"runArgs": [
+			"--privileged",
+			"--init"
+		]
 	},
 	// Features pre-installed in your development environment:
 	"features": {
@@ -21,7 +30,7 @@
 		
 		// AWS CLI installation - allows you to run `aws` commands in terminal
 		// https://aws.amazon.com/cli/
-		"ghcr.io/devcontainers/features/aws-cli:1": {},
+		//"ghcr.io/devcontainers/features/aws-cli:1": {},
 		
 		// AWS CDK (Cloud Development Kit) installation
 		// https://aws.amazon.com/cdk/
@@ -38,7 +47,7 @@
 		// Using these features saves you from writing custom installation scripts for tools you need
 
 		// Docker in Docker - allows you to create Docker containers within your development environment
-		// "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 		
 		// Claude Code feature (if needed)
 		// "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
@@ -117,7 +126,10 @@
 				"hediet.vscode-drawio",
 				// Code formatting extensions
 				"esbenp.prettier-vscode",
-				"dbaeumer.vscode-eslint"
+				"dbaeumer.vscode-eslint",
+                "oderwat.indent-rainbow",
+				"vscode-icons-team.vscode-icons",
+				"nopjmp.fairyfloss"
 			],
 			"settings": {
 				// Default terminal in Linux
@@ -130,7 +142,7 @@
 					"source.fixAll.stylelint": "always"
 				},
 				"[typescript]": {
-				  "editor.formatOnSave": false
+					"editor.formatOnSave": false
 				},
 				"eslint.validate": ["typescript"],
 				"mcp": {
@@ -162,15 +174,15 @@
 							}
 						},
 						"awslabs.core-mcp-server": {
-						  "command": "uvx",
-						  "args": [
-							"awslabs.core-mcp-server@latest"
-						  ],
-						  "env": {
-							"FASTMCP_LOG_LEVEL": "ERROR"
-						  },
-						  "autoApprove": [],
-						  "disabled": false
+							"command": "uvx",
+							"args": [
+								"awslabs.core-mcp-server@latest"
+							],
+							"env": {
+								"FASTMCP_LOG_LEVEL": "ERROR"
+							},
+							"autoApprove": [],
+							"disabled": false
 						},
 						"awslabs.cdk-mcp-server": {
 							"command": "uvx",
@@ -211,10 +223,25 @@
 							"command": "uvx",
 							"args": ["awslabs.aws-diagram-mcp-server"],
 							"env": {
-							  "FASTMCP_LOG_LEVEL": "ERROR"
+								"FASTMCP_LOG_LEVEL": "ERROR"
 							},
 							"autoApprove": [],
 							"disabled": false
+						},
+						"awslabs.cfn-mcp-server": {
+							"command": "uvx",
+							"args": [
+								"awslabs.cfn-mcp-server@latest"
+							],
+							"env": {
+								"AWS_PROFILE": "your-named-profile"
+							},
+							"disabled": false,
+							"autoApprove": []
+						},
+						"aws-knowledge-mcp-server": {
+							"command": "uvx",
+							"args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"]
 						}
 					}
 				}
