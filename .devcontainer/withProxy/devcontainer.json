@@ -40,6 +40,7 @@
 		//	// if you want to install a specific version of the AWS CDK
 		//	// "version": "2.186.0"
 		//}
+		//"ghcr.io/devcontainers-contrib/features/localstack:2": {},
 		// AWS SSO Util to simplify authentication with AWS SSO
 		// Uncomment if you prefer using static AWS IAM keys
 		//"ghcr.io/tomharvey/devcontainer-features/aws-sso-util:1": {}
@@ -70,8 +71,11 @@
 	},
 
 	// Environment variables for your development environment:
-	"containerEnv": {
-	},
+    // Suppress warning messages when using cdklocal
+    "containerEnv": {
+        "ENV": "local",
+        "JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION": "true"
+    },
 
 	// Mount local directories into your development environment:
 	"mounts": [
