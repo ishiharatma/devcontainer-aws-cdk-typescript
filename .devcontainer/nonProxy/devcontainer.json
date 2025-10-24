@@ -37,6 +37,7 @@
 		// TypeScript API reference: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
 		// https://github.com/danielbraun89/devcontainer-features/tree/main/src/aws-cdk
 		//"ghcr.io/devcontainers-contrib/features/aws-cdk:2": {}
+		//"ghcr.io/devcontainers-contrib/features/localstack:2": {},
 
 		// AWS SSO Util to simplify authentication with AWS SSO
 		// Uncomment if you prefer using static AWS IAM keys
@@ -62,8 +63,11 @@
 	},
 
 	// Environment variables for your development environment:
-	"containerEnv": {
-	},
+    // cdklocal使った時の警告メッセージを抑制
+    "containerEnv": {
+        "ENV": "local",
+        "JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION": "true"
+    },
 
 	// Mount local directories into your development environment:
 	"mounts": [
