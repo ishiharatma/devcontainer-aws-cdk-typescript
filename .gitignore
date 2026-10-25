@@ -1,5 +1,8 @@
-# AWS local state (.aws/ is placed at the project root by the consuming project)
-.aws/
+# AWS credentials and local config (the consuming project places these at its root)
+.aws/credentials
+.aws/config
+.aws/**/
+!.aws/config.sample
 
 # CA certificates (only the sample root CA is tracked)
 *.cer
