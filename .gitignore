@@ -2,7 +2,6 @@
 .aws/credentials
 .aws/config
 .aws/**/
-!.aws/config.sample
 
 # CA certificates (only the sample root CA is tracked)
 *.cer
